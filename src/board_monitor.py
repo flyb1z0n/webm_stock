@@ -6,9 +6,8 @@ import mongodb
 
 class BoardMonitor:
     THREAD_URL = "https://2ch.hk/b/threads.json";
-    delay = 0
 
-    def __init__(self, delay):
+    def __init__(self, delay = 0):
         self.delay = delay;
     
     def monitor(self):
@@ -53,9 +52,4 @@ class BoardMonitor:
             print(str(saved_count) + ' new threads.')
         return 
         
-
-# print(config.BOARD_MONITOR_DELAY_SECONDS)
-
-# id = mongodb.test().insert_one({'first':'value1', 'second':'value2'}).inserted_id
-# print(id)
 BoardMonitor(config.BOARD_MONITOR_DELAY_SECONDS).monitor();
