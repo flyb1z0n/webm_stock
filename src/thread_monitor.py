@@ -19,10 +19,18 @@ class ThreadMonitor:
             time.sleep(self.delay)
 
     def _process_updates(self):
-
-        # todo implement
-        for r in mongodb.get_next_thread_to_process():
-            print(r)
+        while True:
+            # threads - should always have size of 0 or 1
+            threads = mongodb.get_next_thread_to_process();
+            if threads is None:
+                return
+            for thread in threads:
+                self._proces_thread(thread)
+    
+    def _proces_thread(self, thread):
+        print(thread)
+        mongodb.update_thread_sync_date(thread['num']);
+        
         
 
 

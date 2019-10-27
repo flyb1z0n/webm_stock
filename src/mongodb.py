@@ -34,6 +34,10 @@ def insert_thread(num, status):
         'last_sync_date' : datetime.fromtimestamp(0)
         })
 
+# retrieves threads that were processed more than THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS seconds ago 
 def get_next_thread_to_process():
     date = datetime.now() - timedelta(seconds=config.THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS)
     return threads_collection().find({'last_sync_date' : {"$lt" : date}}).sort([('last_sync_date', 1)]).limit(1);
+
+def update_thread_sync_date(num):
+    threads_collection().update({"num":num},{ '$set':{ 'last_sync_date' :  datetime.now()}})
