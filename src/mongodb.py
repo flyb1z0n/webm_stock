@@ -14,6 +14,9 @@ def api_response_collection():
 def threads_collection():
     return db[config.DB_THREADS]
 
+def files_collection():
+    return db[config.DB_FILES]
+
 def save_api_response(response):
     entry = {
         'url' : response.url,
@@ -37,7 +40,21 @@ def insert_thread(num, status):
 # retrieves threads that were processed more than THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS seconds ago 
 def get_next_thread_to_process():
     date = datetime.now() - timedelta(seconds=config.THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS)
-    return threads_collection().find({'last_sync_date' : {"$lt" : date}}).sort([('last_sync_date', 1)]).limit(1);
+    return threads_collection().find({'status': 'ACTIVE','last_sync_date' : {"$lt" : date}}).sort([('last_sync_date', 1)]).limit(1);
 
-def update_thread_sync_date(num):
-    threads_collection().update({"num":num},{ '$set':{ 'last_sync_date' :  datetime.now()}})
+def update_thread(num, status='ACTIVE', fail_count = 0, last_post_num = None):
+    data = {
+        'last_sync_date' :  datetime.now(),
+        'status' : status,
+        'fail_count' : fail_count
+    }
+    if last_post_num != None:
+        data['last_post_num'] = last_post_num
+
+    threads_collection().update({"num":num} ,{'$set': data})
+
+def add_file(num, file):
+    file['thread_num'] = num
+    file['creation_date'] = datetime.now()
+    file['status'] = 'NEW' 
+    files_collection().insert_one(file)
