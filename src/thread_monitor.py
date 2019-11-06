@@ -3,20 +3,23 @@ import config
 import time
 import mongodb
 import requests
+import threading
+import logging
 
-class ThreadMonitor:
+class ThreadMonitor(threading.Thread):
 
     def __init__(self, delay = 0):
         self.delay = delay;
+        threading.Thread.__init__(self)
 
-    def monitor(self):
+    def run(self):
         while(True):
             try:
                 self._process_updates()
             except:
-                print("An exception occurred")
+                logging.info("An exception occurred")
                 traceback.print_exc() 
-            print("Sleeping for " + str(self.delay) + " seconds.")
+            logging.info("Sleeping for " + str(self.delay) + " seconds.")
             time.sleep(self.delay)
 
     def _process_updates(self):
@@ -29,7 +32,7 @@ class ThreadMonitor:
                 self._proces_thread(thread)
     
     def _proces_thread(self, thread):
-        print(thread)
+        logging.info(thread)
         thread_num = thread['num']
         last_post_num = thread.get('last_post_num', 0)
         try:
@@ -39,10 +42,10 @@ class ThreadMonitor:
             files = sum([x['files'] for x in posts],[])
             for file in files:
                 mongodb.add_file(thread_num, file)
-            print("Thread # "+ str(thread_num) + ' added '+ str(len(files)) + " files to download")
+            logging.info("Thread # "+ str(thread_num) + ' added '+ str(len(files)) + " files to download")
             mongodb.update_thread(thread_num, last_post_num = max_post_num)
         except:
-            print("Error during getting content of thread # " + str(thread_num))
+            logging.info("Error during getting content of thread # " + str(thread_num))
             traceback.print_exc() 
             fail_count = thread.get('fail_count', 0);
             fail_count += 1
@@ -58,6 +61,4 @@ class ThreadMonitor:
         
 
 
-ThreadMonitor(config.BOARD_MONITOR_DELAY_SECONDS).monitor();
-
-# ThreadMonitor()._proces_thread({'num':206331907, 'last_post_num':206342171})
+# ThreadMonitor(config.BOARD_MONITOR_DELAY_SECONDS).start()

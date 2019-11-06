@@ -3,21 +3,24 @@ import traceback
 import time
 import config
 import mongodb
+import logging
+import threading
 
-class BoardMonitor:
+class BoardMonitor(threading.Thread):
     THREAD_URL = "https://2ch.hk/b/threads.json";
 
     def __init__(self, delay = 0):
         self.delay = delay;
+        threading.Thread.__init__(self)
     
-    def monitor(self):
+    def run(self):
         while(True):
             try:
                 self._process_updates()
             except:
-                print("An exception occurred")
+                logging.info("An exception occurred")
                 traceback.print_exc() 
-            print("Sleeping for " + str(self.delay) + " seconds.")
+            logging.info("Sleeping for " + str(self.delay) + " seconds.")
             time.sleep(self.delay)
     
     def _process_updates(self):
@@ -30,7 +33,7 @@ class BoardMonitor:
         r = requests.get(url = self.THREAD_URL, timeout=10) 
         mongodb.save_api_response(r)
         if(r.status_code != requests.codes.ok):
-            print('Request failed.')
+            logging.info('Request failed.')
             return []
         return r.json()['threads']
 
@@ -47,9 +50,8 @@ class BoardMonitor:
 
     def _log_result(self, saved_count):
         if saved_count == 0:
-            print('0 new threads.')
+            logging.info('0 new threads.')
         else:
-            print(str(saved_count) + ' new threads.')
+            logging.info(str(saved_count) + ' new threads.')
         return 
         
-BoardMonitor(config.BOARD_MONITOR_DELAY_SECONDS).monitor();

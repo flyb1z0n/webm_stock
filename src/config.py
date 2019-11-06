@@ -1,3 +1,6 @@
+import logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(threadName)s] - %(message)s")
+
 DB_URL = 'localhost'
 DB_PORT = 27017
 DB_NAME = 'webm_stock'
@@ -9,6 +12,6 @@ DB_THREADS = 'threads'
 DB_FILES = 'files'
 
 
-BOARD_MONITOR_DELAY_SECONDS = 5
-THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS = 10  
+BOARD_MONITOR_DELAY_SECONDS = 30
+THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS = 30  
 THREAD_FAIL_COUNT_LIMIT = 5
