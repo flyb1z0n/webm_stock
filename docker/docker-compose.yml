@@ -1,0 +1,19 @@
+version: '3'
+services:
+  webm_db:
+    image: mongo:4.2.1
+    restart: always
+    volumes:
+      - webm-data:/data/db
+      - webm-config:/data/configdb
+  webm_monitor:
+    build: 
+      dockerfile: Dockerfile
+      context: ../
+    links:
+      - webm_db
+    depends_on:
+      - webm_db
+volumes:
+  webm-data:
+  webm-config:
