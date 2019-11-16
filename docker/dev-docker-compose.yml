@@ -1,0 +1,13 @@
+version: '3'
+services:
+  webm_db:
+    image: mongo:4.2.1
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - webm-data:/data/db
+      - webm-config:/data/configdb
+volumes:
+  webm-data:
+  webm-config:
