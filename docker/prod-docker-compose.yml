@@ -9,7 +9,7 @@ services:
   webm_monitor:
     build: 
       dockerfile: Dockerfile
-      context: ..ß/
+      context: ../
     links:
       - webm_db
     depends_on:
