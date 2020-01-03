@@ -6,6 +6,12 @@
 
 &nbsp;
 
+## Start application
+* **Crawler:**
+```
+python -m crawler
+```
+
 ## Python:
 
 1. init new virtual env

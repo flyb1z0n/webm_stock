@@ -1,16 +1,15 @@
 import requests 
 import traceback
 import time
-import config
-import mongodb
+from crawler.data import mongodb
 import logging
 import threading
 
 class BoardMonitor(threading.Thread):
-    THREAD_URL = "https://2ch.hk/b/threads.json";
 
-    def __init__(self, delay = 0):
-        self.delay = delay;
+    def __init__(self, url, delay):
+        self.url = url
+        self.delay = delay
         threading.Thread.__init__(self)
     
     def run(self):
@@ -30,11 +29,13 @@ class BoardMonitor(threading.Thread):
         self._log_result(saved_count)
 
     def _get_threads(self):
-        r = requests.get(url = self.THREAD_URL, timeout=10) 
+        logging.info("Requesting " + self.url)
+        r = requests.get(url = self.url, timeout=10) 
         mongodb.save_api_response(r)
         if(r.status_code != requests.codes.ok):
             logging.info('Request failed.')
             return []
+        logging.info("Response status code: " + str(r.status_code))
         return r.json()['threads']
 
     def _save_new_threads(self, threads):
@@ -54,4 +55,3 @@ class BoardMonitor(threading.Thread):
         else:
             logging.info(str(saved_count) + ' new threads.')
         return 
-        
