@@ -1,6 +1,9 @@
 TODO:
-    ☐ add a model for `thread` 
-    ☐ add mongo db support
+    ☐ resolve 100% load
+    ☐ add daily statistic
+    ☐ API?
 
-Plans: 
-    ☐ find out how to create python modules
+Archive:
+  ✘ add a model for `thread` @cancelled(20-01-04 15:20) @project(TODO)
+  ✔ add mongo db support @done(20-01-04 15:20) @project(TODO)
+  ✘ find out how to create python modules @cancelled(20-01-04 15:20) @project(Plans)
