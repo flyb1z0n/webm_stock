@@ -22,9 +22,9 @@ class BoardMonitor(threading.Thread):
             logging.info("Sleeping for " + str(self.delay) + " seconds.")
             time.sleep(self.delay)
     
+    # one iteration -> checks new threads
     def _process_updates(self):
         threads = self._get_threads()
-
         saved_count = self._save_new_threads(threads)
         self._log_result(saved_count)
 
@@ -55,3 +55,4 @@ class BoardMonitor(threading.Thread):
         else:
             logging.info(str(saved_count) + ' new threads.')
         return 
+

@@ -24,6 +24,7 @@ class ThreadMonitor(threading.Thread):
             logging.info("Sleeping for " + str(self.delay) + " seconds.")
             time.sleep(self.delay)
 
+    # one iteration -> process one 2ch thread
     def _process_updates(self):
         while True:
             # threads - should always have size of 0 or 1
@@ -55,6 +56,7 @@ class ThreadMonitor(threading.Thread):
             traceback.print_exc() 
             fail_count = thread.get('fail_count', 0);
             fail_count += 1
+            logging.info("Fail count: " +str(fail_count))
             status = 'IN-ACTIVE' if fail_count > self.fail_limit else 'ACTIVE'
             mongodb.update_thread(thread_num, status = status, fail_count = fail_count)      
         
