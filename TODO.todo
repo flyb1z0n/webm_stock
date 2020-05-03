@@ -1,9 +1,11 @@
 TODO:
+    ☐ remove save of api responses
     ☐ resolve 100% load
     ☐ add daily statistic
     ☐ API?
 
 Archive:
+  ✔ save only video files @done(20-05-04 00:35) @project(TODO)
   ✘ add a model for `thread` @cancelled(20-01-04 15:20) @project(TODO)
   ✔ add mongo db support @done(20-01-04 15:20) @project(TODO)
   ✘ find out how to create python modules @cancelled(20-01-04 15:20) @project(Plans)
