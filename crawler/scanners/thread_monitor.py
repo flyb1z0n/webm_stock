@@ -4,13 +4,17 @@ from crawler.data import mongodb
 import requests
 import threading
 import logging
+import os
+
 
 class ThreadMonitor(threading.Thread):
 
-    def __init__(self, url, delay, fail_limit):
+    def __init__(self, url, delay, fail_limit, media_extensions):
         self.url = url
         self.delay = delay
         self.fail_limit = fail_limit
+        print(media_extensions)
+        self.media_extensions = set(media_extensions.split(' '))
         threading.Thread.__init__(self)
 
     def run(self):
@@ -26,15 +30,14 @@ class ThreadMonitor(threading.Thread):
 
     # one iteration -> process one 2ch thread
     def _process_updates(self):
-        while True:
-            # threads - should always have size of 0 or 1
-            threads = mongodb.get_next_thread_to_process()
-            if threads is None:
-                return
-            for thread in threads:
-                self._proces_thread(thread)
+        # threads - should always have size of 0 or 1
+        threads = mongodb.get_next_thread_to_process()
+        if threads is None:
+            return
+        for thread in threads:
+            self._process_thread(thread)
     
-    def _proces_thread(self, thread):
+    def _process_thread(self, thread):
         logging.info(thread)
         thread_num = thread['num']
         last_post_num = thread.get('last_post_num', 0)
@@ -46,10 +49,16 @@ class ThreadMonitor(threading.Thread):
                 logging.info("No new posts for thread # " + str(thread_num))
                 return
             max_post_num = max((x['num'] for x in posts))
-            files = sum([x['files'] for x in posts],[])
+            files = sum([x['files'] for x in posts], [])
+            count_media_files = 0
             for file in files:
-                mongodb.add_file(thread_num, file)
-            logging.info("Thread # "+ str(thread_num) + ' added '+ str(len(files)) + " files to download")
+                name, ext = os.path.splitext(file['name'])
+                if ext.lower() in self.media_extensions:
+                    mongodb.add_file(thread_num, file)
+                    count_media_files += 1
+            logging.info("Updates for thread #" + str(thread_num)
+                         + ' found ' + str(len(files)) + " files"
+                         + ' added ' + str(count_media_files) + " media files")
             mongodb.update_thread(thread_num, last_post_num = max_post_num)
         except:
             logging.info("Error during getting content of thread # " + str(thread_num))
