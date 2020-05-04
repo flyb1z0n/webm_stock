@@ -31,8 +31,8 @@ class BoardMonitor(threading.Thread):
 
     def _get_threads(self):
         logging.info("Requesting " + self.url)
-        r = requests.get(url = self.url, timeout=10) 
-        mongodb.save_api_response(r)
+        r = requests.get(url=self.url, timeout=10)
+#        mongodb.save_api_response(r)
         if r.status_code != requests.codes.ok:
             logging.info('Request failed.')
             return []
