@@ -19,7 +19,7 @@ class ThreadMonitor(threading.Thread):
 
     def run(self):
         logging.info("Thread monitor has been started.")
-        while(True):
+        while True:
             try:
                 self._process_updates()
             except:
@@ -45,7 +45,7 @@ class ThreadMonitor(threading.Thread):
             posts = self._get_posts(thread_num)
             posts = [x for x in posts if x['num'] > last_post_num]
             if not posts:
-                mongodb.update_thread(thread_num, last_post_num = last_post_num)
+                mongodb.update_thread(thread_num, last_post_num=last_post_num)
                 logging.info("No new posts for thread # " + str(thread_num))
                 return
             max_post_num = max((x['num'] for x in posts))
@@ -59,20 +59,20 @@ class ThreadMonitor(threading.Thread):
             logging.info("Updates for thread #" + str(thread_num)
                          + ' found ' + str(len(files)) + " files"
                          + ' added ' + str(count_media_files) + " media files")
-            mongodb.update_thread(thread_num, last_post_num = max_post_num)
+            mongodb.update_thread(thread_num, max_post_num)
         except:
             logging.info("Error during getting content of thread # " + str(thread_num))
             traceback.print_exc() 
-            fail_count = thread.get('fail_count', 0);
+            fail_count = thread.get('fail_count', 0)
             fail_count += 1
-            logging.info("Fail count: " +str(fail_count))
+            logging.info("Fail count: " + str(fail_count))
             status = 'IN-ACTIVE' if fail_count > self.fail_limit else 'ACTIVE'
-            mongodb.update_thread(thread_num, status = status, fail_count = fail_count)      
+            mongodb.update_thread(thread_num, status, fail_count)
         
     def _get_posts(self, num):
         url = self.url.format(str(num))
         logging.info("Requesting " + url)
-        r = requests.get(url = url, timeout=10)
-        if(r.status_code != requests.codes.ok):
-            raise Exception(url+" responds with " +str(r.status_code))
+        r = requests.get(url=url, timeout=10)
+        if r.status_code != requests.codes.ok:
+            raise Exception(url + " responds with " + str(r.status_code))
         return r.json()['threads'][0]['posts']

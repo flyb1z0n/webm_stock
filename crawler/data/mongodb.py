@@ -5,24 +5,30 @@ from dynaconf import settings
 client = MongoClient(settings.DB_URL, settings.DB_PORT);
 db = client[settings.DB_NAME]
 
+
 def test():
     return db[settings.DB_COLLECTION_TEST]
+
 
 def api_response_collection():
     return db[settings.DB_API_RESPONSES]
 
+
 def threads_collection():
     return db[settings.DB_THREADS]
+
 
 def files_collection():
     return db[settings.DB_FILES]
 
+
+# for dev only
 def save_api_response(response):
     entry = {
-        'url' : response.url,
-        'status_code' : response.status_code,
-        'content' : response.text,
-        'date' : datetime.now()
+        'url': response.url,
+        'status_code': response.status_code,
+        'content': response.text,
+        'date': datetime.now()
     }
     api_response_collection().insert_one(entry)
 
@@ -46,7 +52,7 @@ def get_next_thread_to_process():
     return threads_collection().find({'status': 'ACTIVE','last_sync_date' : {"$lt" : date}}).sort([('last_sync_date', 1)]).limit(1);
 
 
-def update_thread(num, status='ACTIVE', fail_count = 0, last_post_num = None):
+def update_thread(num, status='ACTIVE', fail_count=0, last_post_num=None):
     data = {
         'last_sync_date' :  datetime.now(),
         'status' : status,

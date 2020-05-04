@@ -14,7 +14,7 @@ class BoardMonitor(threading.Thread):
         threading.Thread.__init__(self)
     
     def run(self):
-        while(True):
+        while True:
             try:
                 self._process_updates()
             except:
@@ -41,21 +41,20 @@ class BoardMonitor(threading.Thread):
 
     @staticmethod
     def _save_new_threads(threads):
-        num_saved = 0;
-        if threads == []:
+        num_saved = 0
+        if not threads:
             return num_saved
         for thread in threads:
             found = mongodb.get_thread_by_num(thread['num'])
             if found is None:
-                mongodb.insert_thread(num = thread['num'], status = 'ACTIVE')
+                mongodb.insert_thread(thread['num'], 'ACTIVE')
                 num_saved += 1
         return num_saved
 
-
-    def _log_result(self, saved_count):
+    @staticmethod
+    def _log_result(saved_count):
         if saved_count == 0:
             logging.info('0 new threads.')
         else:
             logging.info(str(saved_count) + ' new threads.')
         return 
-
