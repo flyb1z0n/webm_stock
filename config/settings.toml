@@ -1,7 +1,5 @@
 [default]
-# DB_URL = 'webm_db'
 DB_URL = 'localhost'
-
 DB_PORT = 27017
 DB_NAME = 'webm_stock'
 
@@ -17,3 +15,7 @@ FILE_MEDIA_EXTENSIONS = '.webm .mp4'
 
 BOARD_URL = 'https://2ch.hk/b/threads.json'
 THREAD_URL = 'https://2ch.hk/b/res/{}.json'
+
+[production]
+DB_URL = 'webm_db'
+THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS = 2

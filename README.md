@@ -54,6 +54,30 @@ deactivate
 docker-compose -f ./docker/dev-docker-compose.yml up -d
 ```
 &nbsp;
+* **RUN prod-like env locally**:
+```
+docker-compose -f ./docker/prod-docker-compose.yml -p prod up -d
+```
+&nbsp;
+* **Remove prod-like env locally**:
+
+Stop:
+```
+docker-compose -f ./docker/prod-docker-compose.yml -p prod stop
+```
+
+Delete containers:
+```
+docker-compose -f ./docker/prod-docker-compose.yml -p prod rm
+```
+
+Prune images:
+```
+docker image prune -a
+```
+
+
+&nbsp;
 * **Connect to mongo**
 
 ```

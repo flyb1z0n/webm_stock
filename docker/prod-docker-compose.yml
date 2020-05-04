@@ -10,6 +10,8 @@ services:
     build: 
       dockerfile: Dockerfile
       context: ../
+    environment:
+      - ENV_FOR_DYNACONF=production
     links:
       - webm_db
     depends_on:
