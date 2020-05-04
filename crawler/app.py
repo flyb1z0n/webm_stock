@@ -13,7 +13,7 @@ def init():
 def start_monitoring():
     logging.info('Starting Monitors.')
 
-    # BoardMonitor(settings.BOARD_URL, settings.BOARD_MONITOR_DELAY_SECONDS).start()
+    BoardMonitor(settings.BOARD_URL, settings.BOARD_MONITOR_DELAY_SECONDS).start()
     ThreadMonitor(settings.THREAD_URL,
                   settings.THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS,
                   settings.THREAD_FAIL_COUNT_LIMIT,
