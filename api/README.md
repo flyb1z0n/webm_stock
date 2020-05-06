@@ -20,7 +20,7 @@ python3 -m venv api_env
 ```
 2. activate it
 ```
-source api/bin/activate
+source api_env/bin/activate
 ```
 3. install dependencies
 ```
