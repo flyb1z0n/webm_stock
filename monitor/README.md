@@ -16,11 +16,11 @@ python -m crawler
 
 1. init new virtual env
 ```
-python3 -m venv env
+python3 -m venv monitor_env
 ```
 2. activate it
 ```
-source env/bin/activate
+source monitor_env/bin/activate
 ```
 3. install dependencies
 ```

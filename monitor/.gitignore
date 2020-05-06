@@ -1,5 +1,5 @@
-.DS_Store
-.idea
+monitor_env
 .vscode
+.DS_Store
 *.pyc
 __pycache__
