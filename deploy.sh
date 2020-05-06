@@ -1,3 +1,4 @@
 #!/bin/sh
-
-sh ./monitor/deploy.sh
+cd ./monitor
+sh ./deploy.sh
+cd ..
