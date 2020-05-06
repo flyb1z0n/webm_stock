@@ -10,6 +10,7 @@ services:
     build: 
       dockerfile: Dockerfile
       context: ../
+    restart: always
     environment:
       - ENV_FOR_DYNACONF=production
     links:
