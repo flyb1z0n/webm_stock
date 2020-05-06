@@ -1,4 +1,6 @@
 #!/bin/sh
-cd ./monitor
-sh ./deploy.sh
-cd ..
+git pull
+
+docker-compose -f ./docker/prod-docker-compose.yml build
+docker-compose -f ./docker/prod-docker-compose.yml stop
+docker-compose -f ./docker/prod-docker-compose.yml up -d
