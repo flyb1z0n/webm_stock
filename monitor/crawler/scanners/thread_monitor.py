@@ -59,7 +59,7 @@ class ThreadMonitor(threading.Thread):
             logging.info("Updates for thread #" + str(thread_num)
                          + ' found ' + str(len(files)) + " files"
                          + ' added ' + str(count_media_files) + " media files")
-            mongodb.update_thread(thread_num, max_post_num)
+            mongodb.update_thread(thread_num, last_post_num=max_post_num)
         except:
             logging.info("Error during getting content of thread # " + str(thread_num))
             traceback.print_exc() 
