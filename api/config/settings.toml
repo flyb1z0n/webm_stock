@@ -1,0 +1,12 @@
+[default]
+DB_URL = 'localhost'
+DB_PORT = 27017
+DB_NAME = 'webm_stock'
+
+DB_THREADS = 'threads'
+DB_FILES = 'files'
+
+FILE_MEDIA_EXTENSIONS = '.webm .mp4'
+
+[production]
+DB_URL = 'webm_db'

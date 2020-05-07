@@ -1,5 +1,5 @@
 from flask import Flask
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None)
 
-from rest.controllers import thread, stats
+from rest.controllers import errors, thread, stats
