@@ -21,6 +21,4 @@ def create_thread():
 @app.route('/thread/<int:num>', methods=['PUT'])
 def update_thread(num):
     thread = thread_service.update_thread(num, request.json)
-    if thread is None:
-        abort(404, 'Thread num #' + str(num) + ' does not exist.')
     return jsonify(thread)
