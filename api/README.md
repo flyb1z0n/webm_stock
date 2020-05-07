@@ -7,9 +7,9 @@
 &nbsp;
 
 ## Start application
-* **Crawler:**
+* **Rest API:**
 ```
-python -m crawler
+python -m rest
 ```
 
 ## Python:
@@ -41,7 +41,7 @@ pip freeze > requirements.txt
 ```
 deactivate
 ```
---- 
+
 ## Environment:
 `dev-docker-compose.yml` defines environment required for delvelopment.
 
