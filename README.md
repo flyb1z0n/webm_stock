@@ -40,6 +40,16 @@ python -m api
 ```
 
 ### Actions:
+* **Add dependency:**
+```
+pip install <packade_name>
+```
+and then update `requirements.txt`
+```
+pip freeze > requirements.txt
+```
+
+
 **Init DEV ENV**:
 ``` 
 docker-compose -f ./_docker/dev-docker-compose.yml up -d
