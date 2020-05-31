@@ -43,7 +43,13 @@ python -m crawler
 docker-compose -f ./_docker/dev-docker-compose.yml up -d
 ```
 &nbsp;
+**Build**:
+```
+docker-compose -f ./_docker/prod-docker-compose.yml -p prod build
+```
+
 **RUN prod-like env locally**:
+&nbsp;
 ```
 docker-compose -f ./_docker/prod-docker-compose.yml -p prod up -d
 ```
