@@ -1,5 +1,5 @@
 from flask import jsonify
-from rest import app
+from api import app
 
 
 @app.route('/', methods=['GET'])

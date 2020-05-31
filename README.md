@@ -34,8 +34,10 @@ pip install -r requirements.txt
 python -m crawler
 ```
 
-
-
+* **Rest API:**
+```
+python -m api
+```
 
 ### Actions:
 **Init DEV ENV**:

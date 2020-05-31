@@ -1,5 +1,5 @@
-from rest.data import mongodb
-from rest.services.validators import thread_validator as validator
+from data import mongodb
+from api.services.validators import thread_validator as validator
 from datetime import datetime
 
 

@@ -1,6 +1,6 @@
 from flask import jsonify
 from werkzeug.exceptions import HTTPException
-from rest import app
+from api import app
 
 
 @app.errorhandler(HTTPException)

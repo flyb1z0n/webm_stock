@@ -1,4 +1,4 @@
-from rest.data import mongodb
+from data import mongodb
 from werkzeug.exceptions import BadRequest, NotFound
 
 ALLOWED_THREAD_STATUSES = {'ACTIVE', 'IN-ACTIVE'}
