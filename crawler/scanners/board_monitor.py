@@ -1,7 +1,7 @@
 import requests 
 import traceback
 import time
-from crawler.data import mongodb
+from data import mongodb
 import logging
 import threading
 
