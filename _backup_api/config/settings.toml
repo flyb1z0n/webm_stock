@@ -9,4 +9,4 @@ DB_FILES = 'files'
 FILE_MEDIA_EXTENSIONS = '.webm .mp4'
 
 [production]
-DB_URL = 'webm_db'
+DB_URL = 'api_db'

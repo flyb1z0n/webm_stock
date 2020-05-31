@@ -8,8 +8,8 @@ services:
       - webm-db-config:/data/configdb
   webm_monitor:
     build: 
-      dockerfile: ./Dockerfile
-      context: ../monitor/
+      dockerfile: ../crawler.Dockerfile
+      context: ../
     restart: always
     environment:
       - ENV_FOR_DYNACONF=production

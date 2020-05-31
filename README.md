@@ -13,28 +13,51 @@
 
 `prod-docker-compose.yml` is used for production deployment.
 
+### Virtual environment configuration
+
+1. init new virtual env
+```
+python3 -m venv _venv
+```
+2. activate it
+```
+source _venv/bin/activate
+```
+3. install dependencies
+```
+pip install -r requirements.txt
+``` 
+
+## Start application
+* **Start Crawler:**
+```
+python -m crawler
+```
+
+
+
 
 ### Actions:
 **Init DEV ENV**:
 ``` 
-docker-compose -f ./docker/dev-docker-compose.yml up -d
+docker-compose -f ./_docker/dev-docker-compose.yml up -d
 ```
 &nbsp;
 **RUN prod-like env locally**:
 ```
-docker-compose -f ./docker/prod-docker-compose.yml -p prod up -d
+docker-compose -f ./_docker/prod-docker-compose.yml -p prod up -d
 ```
 &nbsp;
 **Remove prod-like env locally**:
 
 Stop:
 ```
-docker-compose -f ./docker/prod-docker-compose.yml -p prod stop
+docker-compose -f ./_docker/prod-docker-compose.yml -p prod stop
 ```
 
 Delete containers:
 ```
-docker-compose -f ./docker/prod-docker-compose.yml -p prod rm
+docker-compose -f ./_docker/prod-docker-compose.yml -p prod rm
 ```
 
 Prune images:

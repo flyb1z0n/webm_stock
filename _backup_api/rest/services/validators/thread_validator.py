@@ -19,3 +19,4 @@ def validate_update(num, payload):
     thread = mongodb.get_thread_by_num(str(num))
     if not thread:
         raise NotFound('Thread num #' + str(num) + ' does not exist.')
+    # TODO add validation of payload fields
