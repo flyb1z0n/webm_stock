@@ -4,6 +4,12 @@ from api import app
 from api.services import thread_service
 
 
+# TODO open when security comes in
+# @app.route('/thread', methods=['POST'])
+# def create_thread():
+#     thread = thread_service.create_thread(request.json)
+#     return jsonify(thread)
+
 @app.route('/thread/<int:num>', methods=['GET'])
 def get_thread(num):
     thread = thread_service.get_thread(num)
