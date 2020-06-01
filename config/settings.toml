@@ -13,6 +13,7 @@ THREAD_MONITOR_THREAD_REQUEST_DELAY_SECONDS = 5
 THREAD_FAIL_COUNT_LIMIT = 5
 FILE_MEDIA_EXTENSIONS = '.webm .mp4'
 
+BASE_2CH_URL = 'https://2ch.hk/'
 BOARD_URL = 'https://2ch.hk/b/threads.json'
 THREAD_URL = 'https://2ch.hk/b/res/{}.json'
 

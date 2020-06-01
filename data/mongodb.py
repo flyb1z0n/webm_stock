@@ -69,3 +69,6 @@ def add_file(num, file):
     file['creation_date'] = datetime.now()
     file['status'] = 'NEW' 
     files_collection().insert_one(file)
+
+def get_new_files(limit, skip):
+    return files_collection().find().sort([('creation_date', -1)]).limit(limit).skip(skip)
