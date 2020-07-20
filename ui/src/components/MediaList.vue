@@ -31,7 +31,7 @@
             }
         },
         mounted() {
-            fetch('http://flyb1z0n.com/webm_stock/api/files?size=32')
+            fetch('http://webm.flyb1z0n.com/api/files?size=32')
                 .then(response => response.json())
                 .then(json => this.items = json)
         }
