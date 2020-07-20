@@ -1,7 +1,6 @@
 <template>
   <div id="apps">
-    <h1> App</h1>
-    <hr>
+    <h1>Webm Stock</h1>
     <MediaList/>
   </div>
 </template>

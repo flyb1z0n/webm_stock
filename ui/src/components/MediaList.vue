@@ -1,6 +1,12 @@
 <template>
     <ul>
-        <MediaItem v-for="item in items" v-bind:item="item"/>
+        <modal name="modal-video">
+            <video controls autoplay class="media-list-video">
+                <source v-bind:src="selectedItem.base_url + selectedItem.path"/>
+            </video>
+        </modal>
+
+        <MediaItem v-for="item in items" v-bind:item="item" v-on:open-media="openMedia"/>
     </ul>
 </template>
 
@@ -12,9 +18,16 @@
         components: {
             MediaItem
         },
+        methods: {
+            openMedia: function (item) {
+                this.selectedItem = item;
+                this.$modal.show('modal-video');
+            }
+        },
         data() {
             return {
-                items: []
+                items: [],
+                selectedItem: {}
             }
         },
         mounted() {
@@ -28,5 +41,10 @@
 
 <style>
 
+
+    .media-list-video {
+        height: 100%;
+        width: 100%;
+    }
 
 </style>
