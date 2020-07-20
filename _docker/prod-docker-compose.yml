@@ -33,16 +33,23 @@ services:
     depends_on:
       - webm_db
 
+  webm_ui:
+    build:
+      dockerfile: ui.Dockerfile
+      context: ../
+
   nginx:
-    image: nginx:1.15.5
+    image: nginx:1.18.0-alpine
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
     links:
       - webm_api
+      - webm_ui
     depends_on:
       - webm_api
+      - webm_ui
 
 volumes:
   webm-db-data:
