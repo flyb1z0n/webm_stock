@@ -1,5 +1,5 @@
 <template>
-    <li class="media-item-li" v-on:click="openWindows(item)">
+    <li class="media-item-li" v-on:click="openWindows(index)">
         <img v-bind:src="item.base_url + item.thumbnail" class="media-item-img nsfw">
     </li>
 </template>
@@ -7,11 +7,11 @@
 <script>
     export default {
         name: 'MediaItem',
-        props: ['item'],
+        props: ['item', 'index'],
         methods: {
-            openWindows: function(item)
+            openWindows: function(index)
             {
-                this.$emit('open-media', item)
+                this.$emit('open-media', index)
             }
         }
     }

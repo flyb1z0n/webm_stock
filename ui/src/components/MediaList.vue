@@ -6,7 +6,7 @@
             </video>
         </modal>
 
-        <MediaItem v-for="item in items" v-bind:item="item" v-on:open-media="openMedia"/>
+        <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-on:open-media="openMedia"/>
     </ul>
 </template>
 
@@ -19,8 +19,9 @@
             MediaItem
         },
         methods: {
-            openMedia: function (item) {
-                this.selectedItem = item;
+            openMedia: function (index) {
+                this.selectedItemIndex = this.items[index];
+                this.selectedItem = this.items[index];
                 this.$modal.show('modal-video');
             },
             loadMore: function () {
@@ -34,6 +35,7 @@
         data() {
             return {
                 items: [],
+                selectedItemIndex: 0,
                 selectedItem: {},
                 size: 32,
                 page: 0
