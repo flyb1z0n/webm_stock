@@ -1,6 +1,5 @@
 <template>
   <div id="apps">
-    <h1>Webm Stock</h1>
     <MediaList/>
   </div>
 </template>
