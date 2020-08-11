@@ -1,7 +1,9 @@
 <template>
     <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-        <modal name="modal-video" v-bind:item="selectedItem">
-            <video controls autoplay class="media-list-video" ref="video_player">
+        <modal name="modal-video" v-bind:item="selectedItem" @opened="onModalOpened">
+            <video controls autoplay class="media-list-video" ref="video_player"
+                   :style="{ backgroundImage: 'url(' + selectedItem.base_url + selectedItem.thumbnail + ')' }"
+                   v-on:volumechange="volumeChange">
                 <source v-bind:src="selectedItem.base_url + selectedItem.path"/>
             </video>
         </modal>
@@ -19,17 +21,27 @@
             MediaItem
         },
         methods: {
+            onModalOpened: function () {
+                //propagate volume
+                this.$refs.video_player.volume = this.volume
+            },
+            volumeChange: function (e) {
+                // propagate volume back
+                this.volume = this.$refs.video_player.volume
+            },
             openMedia: function (index) {
                 this.selectedItemIndex = index;
                 this.selectedItem = this.items[index];
-                console.log("OpenMedia #",index, this.selectedItem)
+                console.log("OpenMedia #", index, this.selectedItem)
 
 
-                this.$modal.show('modal-video');
+                this.$modal.show('modal-video')
+
 
             },
             loadMore: function () {
-                console.log("Loading More")
+                console.log("Loading More | Page: " + this.page + " | Size: " + this.size)
+
                 this.page += 1
                 return fetch('http://webm.flyb1z0n.com/api/files?size=' + this.size + "&page=" + this.page)
                     .then(response => response.json())
@@ -79,7 +91,8 @@
                 selectedItemIndex: -1,
                 selectedItem: {},
                 size: 64,
-                page: 0
+                page: 0,
+                volume: 0.5
             }
         },
         mounted() {
@@ -96,5 +109,7 @@
     .media-list-video {
         height: 100%;
         width: 100%;
+        background-size: cover;
     }
+
 </style>
