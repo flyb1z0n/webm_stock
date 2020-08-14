@@ -1,6 +1,6 @@
 <template>
     <li class="media-item-li" v-on:click="openWindows(index)">
-        <img v-bind:src="item.base_url + item.thumbnail" class="media-item-img nsfw">
+             <img v-bind:src="item.base_url + item.thumbnail" class="media-item-img nsfw rounded w-100 h-100">
     </li>
 </template>
 
@@ -22,18 +22,10 @@
     .media-item-li {
         list-style-type: none;
         display: inline-block;
-        width:310px;
-        height: 174px;
-        background: #3B666B;
-        border-radius: 8px;
-        margin: 5px;
+        height: 144px;
         text-align: center;
     }
 
-    .media-item-img {
-        height: 100%;
-        width: 100%;
-    }
     .nsfw {
         filter: blur(4px);
         -webkit-filter: blur(4px);

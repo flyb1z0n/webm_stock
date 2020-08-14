@@ -1,5 +1,5 @@
 <template>
-    <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+    <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"  class="row justify-content-md-center">
         <modal name="modal-video" v-bind:item="selectedItem" @opened="onModalOpened">
             <video controls autoplay class="media-list-video" ref="video_player"
                    :style="{ backgroundImage: 'url(' + selectedItem.base_url + selectedItem.thumbnail + ')' }"
@@ -8,7 +8,7 @@
             </video>
         </modal>
 
-        <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-on:open-media="openMedia"/>
+        <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-on:open-media="openMedia" class="col-3 p-1 "/>
     </ul>
 </template>
 
