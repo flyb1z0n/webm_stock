@@ -3,7 +3,7 @@
         <nav class="navbar navbar-light bg-light">
             <span class="navbar-brand mb-0 h1">WebmStock</span>
         </nav>
-        <div class="container">
+        <div class="container p-2">
             <MediaList/>
         </div>
     </div>

@@ -1,14 +1,16 @@
 <template>
-    <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"  class="row justify-content-md-center">
-        <modal name="modal-video" v-bind:item="selectedItem" @opened="onModalOpened">
+    <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"
+        class="row justify-content-md-center">
+        <b-modal id="b-modal-video" size="xl" centered hide-header hide-footer class="mh-100" >
             <video controls autoplay class="media-list-video" ref="video_player"
                    :style="{ backgroundImage: 'url(' + selectedItem.base_url + selectedItem.thumbnail + ')' }"
                    v-on:volumechange="volumeChange">
                 <source v-bind:src="selectedItem.base_url + selectedItem.path"/>
             </video>
-        </modal>
+        </b-modal>
 
-        <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-on:open-media="openMedia" class="col-3 p-1 "/>
+        <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index"
+                   v-on:open-media="openMedia" class="col-3 p-1 "/>
     </ul>
 </template>
 
@@ -30,14 +32,12 @@
                 this.volume = this.$refs.video_player.volume
             },
             openMedia: function (index) {
+                this.isVideoOpen
                 this.selectedItemIndex = index;
                 this.selectedItem = this.items[index];
                 console.log("OpenMedia #", index, this.selectedItem)
 
-
-                this.$modal.show('modal-video')
-
-
+                this.$bvModal.show('b-modal-video')
             },
             loadMore: function () {
                 console.log("Loading More | Page: " + this.page + " | Size: " + this.size)
@@ -107,8 +107,8 @@
 
 <style>
     .media-list-video {
-        height: 100%;
         width: 100%;
+        max-height: calc(100vh - 225px);
         background-size: cover;
     }
 
