@@ -1,5 +1,4 @@
 TODO:
-    ☐ play video in natural size
     ☐ remove css on MediaItem at all (migrate to bootstrap)
     ☐ save videos
     ☐ add daily statistic
@@ -7,6 +6,8 @@ TODO:
     ☐ think about layout and UX
 
 Archive:
+  ✔ remove vue-modal @done(20-08-15 23:43) @project(TODO)
+  ✔ play video in natural size @done(20-08-15 23:39) @project(TODO)
   ✔ add Bootstrap @done(20-08-14 21:28) @project(TODO)
   ✔ align content on center @done(20-08-14 21:52) @project(TODO)
   ✘ resolve 100% load @cancelled(20-08-14 22:23) @project(TODO)
