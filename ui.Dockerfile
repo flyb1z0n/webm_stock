@@ -1,5 +1,5 @@
 # build stage
-FROM node:12.18.2-alpine as build-stage
+FROM node:14.15.1-alpine as build-stage
 WORKDIR /app
 COPY ./ui/ .
 RUN npm install
