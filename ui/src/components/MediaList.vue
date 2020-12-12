@@ -9,7 +9,7 @@
             </video>
         </b-modal>
 
-        <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index"
+        <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-bind:key="item.id"
                    v-on:open-media="openMedia" class="col-3 p-1 "/>
     </ul>
 </template>
