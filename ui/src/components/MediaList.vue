@@ -43,6 +43,7 @@
                 console.log("Loading More | Page: " + this.page + " | Size: " + this.size)
 
                 this.page += 1
+                // dev server is hardcoded
                 return fetch('http://webm.flyb1z0n.com/api/files?size=' + this.size + "&page=" + this.page)
                     .then(response => response.json())
                     .then(json => json.forEach(i => this.items.push(i)))
