@@ -1,7 +1,7 @@
 <template>
     <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"
         class="row justify-content-md-center">
-        <b-modal id="b-modal-video" size="xl" centered hide-header hide-footer class="mh-100" >
+        <b-modal id="b-modal-video" size="xl" centered hide-header hide-footer class="mh-100" @shown=onModalOpened >
             <video controls autoplay class="media-list-video" ref="video_player"
                    :style="{ backgroundImage: 'url(' + selectedItem.base_url + selectedItem.thumbnail + ')' }"
                    v-on:volumechange="volumeChange">
@@ -16,20 +16,25 @@
 
 <script>
     import MediaItem from '@/components/MediaItem'
+    import { mapState } from 'vuex'
 
     export default {
         name: 'MediaList',
         components: {
             MediaItem
         },
+        computed: mapState({
+            items: state => state.items,
+            volume: state => state.volume,
+            pageSize: state => state.pageSize
+        }),
         methods: {
             onModalOpened: function () {
                 //propagate volume
                 this.$refs.video_player.volume = this.volume
             },
             volumeChange: function (e) {
-                // propagate volume back
-                this.volume = this.$refs.video_player.volume
+                this.$store.dispatch('changeVolume', {value: this.$refs.video_player.volume});
             },
             openMedia: function (index) {
                 this.isVideoOpen
@@ -40,17 +45,11 @@
                 this.$bvModal.show('b-modal-video')
             },
             loadMore: function () {
-                console.log("Loading More | Page: " + this.page + " | Size: " + this.size)
-
-                this.page += 1
-                // dev server is hardcoded
-                return fetch('http://webm.flyb1z0n.com/api/files?size=' + this.size + "&page=" + this.page)
-                    .then(response => response.json())
-                    .then(json => json.forEach(i => this.items.push(i)))
+                this.$store.dispatch('loadItems');
             },
             openNextMedia: function () {
                 let nextIndex = this.selectedItemIndex + 1;
-                if (this.items.length - nextIndex < this.size / 2) {
+                if (this.items.length - nextIndex < this.pageSize / 2) {
                     this.loadMore()
                 }
                 if (nextIndex >= this.items.length) {
@@ -88,12 +87,9 @@
         },
         data() {
             return {
-                items: [],
+                // items: [],
                 selectedItemIndex: -1,
-                selectedItem: {},
-                size: 64,
-                page: 0,
-                volume: 0.5
+                selectedItem: {}
             }
         },
         mounted() {

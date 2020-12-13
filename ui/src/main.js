@@ -5,24 +5,13 @@ import InfiniteScroll from 'vue-infinite-scroll'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { store } from './store/store.js';
 
 Vue.config.productionTip = false
 Vue.use(InfiniteScroll)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(Vuex)
-
-//TODO play with a state
-const store = new Vuex.Store({
-  state: {
-    count: 0
-  },
-  mutations: {
-    increment (state) {
-      state.count++
-    }
-  }
-})
 
 
 new Vue({
