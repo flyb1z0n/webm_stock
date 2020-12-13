@@ -87,7 +87,6 @@
         },
         data() {
             return {
-                // items: [],
                 selectedItemIndex: -1,
                 selectedItem: {}
             }
