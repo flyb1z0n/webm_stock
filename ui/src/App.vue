@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1">WebmStock</span>
+            <span class="navbar-brand mb-0 h1">WebmStock [{{mode}}]</span>
         </nav>
         <div class="container p-2">
             <MediaList/>
@@ -18,7 +18,12 @@
         name: 'App',
         components: {
             MediaList
-        }
+        },
+        data() {
+            return {
+                mode: process.env.NODE_ENV
+            }
+        },
     }
 </script>
 

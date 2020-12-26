@@ -28,7 +28,8 @@ export const store =  new Vuex.Store({
         loadItems(context) {
             console.log("Loading More | Page: " + store.state.page + " | Size: " + store.state.pageSize)
             context.commit('incrementPage')
-            fetch('http://webm.flyb1z0n.com/api/files?size=' + store.state.pageSize  + "&page=" + store.state.page)
+            var URL = process.env.VUE_APP_API_URL +'/files?size=';
+            fetch(URL + store.state.pageSize  + "&page=" + store.state.page)
                     .then(response => response.json())
                     .then(items => context.commit('addItems', {items : items}));
         },
