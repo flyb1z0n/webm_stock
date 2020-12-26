@@ -40,8 +40,6 @@
                 this.isVideoOpen
                 this.selectedItemIndex = index;
                 this.selectedItem = this.items[index];
-                console.log("OpenMedia #", index, this.selectedItem)
-
                 this.$bvModal.show('b-modal-video')
             },
             loadMore: function () {
