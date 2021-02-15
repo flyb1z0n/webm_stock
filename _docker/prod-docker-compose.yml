@@ -32,6 +32,9 @@ services:
       - webm_db
     depends_on:
       - webm_db
+    logging:
+      options:
+        max-size: 10m
 
   webm_ui:
     build:
