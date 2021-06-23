@@ -64,10 +64,11 @@ def update_thread(num, status='ACTIVE', fail_count=0, last_post_num=None):
     threads_collection().update({"num":num} ,{'$set': data})
 
 
-def add_file(num, file):
-    file['thread_num'] = num
+def add_file(thread_num, post, file):
+    file['thread_num'] = thread_num
     file['creation_date'] = datetime.now()
     file['status'] = 'NEW' 
+    file['post_num'] = post['num']
     files_collection().insert_one(file)
 
 def get_new_files(limit, skip):

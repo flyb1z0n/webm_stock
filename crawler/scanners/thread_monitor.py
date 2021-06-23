@@ -48,17 +48,20 @@ class ThreadMonitor(threading.Thread):
                 mongodb.update_thread(thread_num, last_post_num=last_post_num)
                 logging.info("No new posts for thread # " + str(thread_num))
                 return
-            max_post_num = max((x['num'] for x in posts))
-            files = sum([x['files'] for x in posts], [])
+            
             count_media_files = 0
-            for file in files:
-                name, ext = os.path.splitext(file['name'])
-                if ext.lower() in self.media_extensions:
-                    mongodb.add_file(thread_num, file)
-                    count_media_files += 1
+            for post in posts:
+                files = post['files']
+                for file in files:
+                    name, ext = os.path.splitext(file['name'])
+                    if ext.lower() in self.media_extensions:
+                        mongodb.add_file(thread_num, post, file)
+                        count_media_files += 1
             logging.info("Updates for thread #" + str(thread_num)
                          + ' found ' + str(len(files)) + " files"
                          + ' added ' + str(count_media_files) + " media files")
+
+            max_post_num = max((x['num'] for x in posts))
             mongodb.update_thread(thread_num, last_post_num=max_post_num)
         except:
             logging.info("Error during getting content of thread # " + str(thread_num))
