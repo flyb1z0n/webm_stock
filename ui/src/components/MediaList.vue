@@ -5,8 +5,15 @@
             <video controls autoplay class="media-list-video" ref="video_player"
                    :style="{ backgroundImage: 'url(' + selectedItem.base_url + selectedItem.thumbnail + ')' }"
                    v-on:volumechange="volumeChange">
-                <source v-bind:src="selectedItem.base_url + selectedItem.path"/>
+                <source v-bind:src="selectedItem.base_url + selectedItem.path"/>±
             </video>
+            <div>
+                
+                            <a :href="'https://2ch.hk/b/res/' + selectedItem.thread_num + '.html#' + selectedItem.post_num" target="_blank" class="float-right">
+                            Открыть тред
+                              <b-icon-arrow-up-right></b-icon-arrow-up-right>
+                            </a>
+            </div>
         </b-modal>
 
         <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-bind:key="item.id"
