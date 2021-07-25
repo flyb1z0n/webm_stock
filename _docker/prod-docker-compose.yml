@@ -7,6 +7,10 @@ services:
     volumes:
       - webm-db-data:/data/db
       - webm-db-config:/data/configdb
+    logging:
+      options:
+        max-size: 10m
+        max-file: 10
 
   webm_monitor:
     build: 
@@ -19,6 +23,10 @@ services:
       - webm_db
     depends_on:
       - webm_db
+    logging:
+      options:
+        max-size: 10m
+        max-file: 10
 
   webm_api:
     build:
@@ -35,6 +43,7 @@ services:
     logging:
       options:
         max-size: 10m
+        max-file: 10
 
   webm_ui:
     build:
@@ -53,6 +62,10 @@ services:
     depends_on:
       - webm_api
       - webm_ui
+    logging:
+      options:
+        max-size: 10m
+        max-file: 10
 
 volumes:
   webm-db-data:
