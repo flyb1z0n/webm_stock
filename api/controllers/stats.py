@@ -1,23 +1,12 @@
-from flask import jsonify
-from api import app
+from api import restx_api
+from flask_restx import Resource
 
-
-@app.route('/', methods=['GET'])
-def index():
-    links = []
-    for rule in app.url_map.iter_rules():
-        methods = rule.methods
-        methods.discard('HEAD')
-        methods.discard('OPTIONS')
-        links.append({
-            'methods': list(methods),
-            'url': str(rule)
-            })
-    return jsonify(links)
-
-
-@app.route('/health', methods=['GET'])
-def health():
-    return jsonify({
-        'status': 'ok'
-    })
+@restx_api.route(
+    '/health',
+    doc={
+        "description": "Lightweight API for health check."
+    }
+)
+class Health(Resource):
+    def get(self):
+        return { 'status': 'ok'}
