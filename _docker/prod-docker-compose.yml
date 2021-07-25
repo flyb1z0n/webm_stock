@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
 
   webm_db:
@@ -9,8 +9,8 @@ services:
       - webm-db-config:/data/configdb
     logging:
       options:
-        max-size: 10m
-        max-file: 10
+        max-size: "10m"
+        max-file: "10"
 
   webm_monitor:
     build: 
@@ -25,8 +25,8 @@ services:
       - webm_db
     logging:
       options:
-        max-size: 10m
-        max-file: 10
+        max-size: "10m"
+        max-file: "10"
 
   webm_api:
     build:
@@ -42,8 +42,8 @@ services:
       - webm_db
     logging:
       options:
-        max-size: 10m
-        max-file: 10
+        max-size: "10m"
+        max-file: "10"
 
   webm_ui:
     build:
@@ -64,8 +64,8 @@ services:
       - webm_ui
     logging:
       options:
-        max-size: 10m
-        max-file: 10
+        max-size: "10m"
+        max-file: "10"
 
 volumes:
   webm-db-data:
