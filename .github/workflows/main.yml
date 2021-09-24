@@ -55,6 +55,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: flyb1z0n/webm_ui:${{needs.bump-version.outputs.new_tag}}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/webm_ui:${{needs.bump-version.outputs.new_tag}}
           file: 'ui.Dockerfile'
       
