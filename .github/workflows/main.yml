@@ -24,6 +24,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
+        DEFAULT_BUMP: 'patch'
         
   # This workflow contains a single job called "build"
   build:
@@ -44,3 +45,5 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          echo TAG:
+          echo ${{needs.bump_version.new_tag}}
