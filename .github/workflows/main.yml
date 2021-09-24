@@ -15,11 +15,14 @@ on:
 jobs:
   bump_version:
     runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.version.outputs.new_tag }}
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
-    - name: Bump version and push tag
+    - id: version
+      name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.36.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -46,4 +49,4 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           echo TAG:
-          echo ${{needs.bump_version.new_tag}}
+          echo ${{needs.bump_version.outputs.new_tag}}
