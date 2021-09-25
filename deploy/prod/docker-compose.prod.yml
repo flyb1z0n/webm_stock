@@ -1,0 +1,72 @@
+version: "3"
+services:
+
+  webm_db:
+    image: mongo:4.2.1
+    restart: always
+    volumes:
+      - webm-db-data:/data/db
+      - webm-db-config:/data/configdb
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  webm_monitor:
+    build: 
+      dockerfile: crawler.Dockerfile
+      context: ../
+    restart: always
+    environment:
+      - ENV_FOR_DYNACONF=production
+    links:
+      - webm_db
+    depends_on:
+      - webm_db
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  webm_api:
+    build:
+      dockerfile: api.Dockerfile
+      context: ../
+    restart: always
+    environment:
+      - ENV_FOR_DYNACONF=production
+      - GUNICORN_WORKERS=5
+    links:
+      - webm_db
+    depends_on:
+      - webm_db
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  webm_ui:
+    build:
+      dockerfile: ui.Dockerfile
+      context: ../
+
+  nginx:
+    image: nginx:1.18.0-alpine
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    links:
+      - webm_api
+      - webm_ui
+    depends_on:
+      - webm_api
+      - webm_ui
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+volumes:
+  webm-db-data:
+  webm-db-config:
