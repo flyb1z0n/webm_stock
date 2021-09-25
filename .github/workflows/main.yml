@@ -123,9 +123,9 @@ jobs:
           uses: appleboy/scp-action@master
           with:
             host: ${{ secrets.SSH_PROD_HOST }}
+            port: ${{ secrets.SSH_PROD_PORT }}
             username: ${{ secrets.SSH_PROD_USERNAME }}
-            key: ${{ secrets.SSH_PROD_PASSWORD }}
-            port: ${{ secrets.SSH_PROD_KEY }}
+            key: ${{ secrets.SSH_PROD_KEY }}
             source: "deploy/prod/*"
             target: ${{env.TARGET_FOLDER}}
             rm: true
@@ -134,9 +134,13 @@ jobs:
           uses: appleboy/ssh-action@master
           with:
             host: ${{ secrets.SSH_PROD_HOST }}
+            port: ${{ secrets.SSH_PROD_PORT }}
             username: ${{ secrets.SSH_PROD_USERNAME }}
-            key: ${{ secrets.SSH_PROD_PASSWORD }}
-            port: ${{ secrets.SSH_PROD_KEY }}
+            key: ${{ secrets.SSH_PROD_KEY }}
             script: |
               cd ${{env.TARGET_FOLDER}}
+              set TAG=${{needs.bump-version.outputs.new_tag}}
               echo ${{needs.bump-version.outputs.new_tag}} > VERSION.txt
+              # docker-compose -f .docker-compose.prod.yml build
+              # docker-compose -f .docker-compose.prod.yml stop
+              # docker-compose -f .docker-compose.prod.yml up -d
