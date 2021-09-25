@@ -13,9 +13,7 @@ services:
         max-file: "10"
 
   webm_monitor:
-    build: 
-      dockerfile: crawler.Dockerfile
-      context: ../
+    image: flyb1z0n/webm_crawler:${TAG}
     restart: always
     environment:
       - ENV_FOR_DYNACONF=production
@@ -29,9 +27,7 @@ services:
         max-file: "10"
 
   webm_api:
-    build:
-      dockerfile: api.Dockerfile
-      context: ../
+    image: flyb1z0n/webm_api:${TAG}
     restart: always
     environment:
       - ENV_FOR_DYNACONF=production
@@ -46,9 +42,7 @@ services:
         max-file: "10"
 
   webm_ui:
-    build:
-      dockerfile: ui.Dockerfile
-      context: ../
+    image: flyb1z0n/webm_ui:${TAG}
 
   nginx:
     image: nginx:1.18.0-alpine
