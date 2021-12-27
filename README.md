@@ -1,4 +1,4 @@
-# Webm_stock
+# Webm stock
 `webm_stock` is an aggregator of funny videos.
 
 ## Documentation
