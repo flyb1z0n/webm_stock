@@ -8,7 +8,8 @@ export const store =  new Vuex.Store({
       page: 0,
       pageSize: 64,
       items: [],
-      volume: localStorage.getItem('volume') ? localStorage.getItem('volume') : 0.5
+      volume: localStorage.getItem('volume') ? localStorage.getItem('volume') : 0.5,
+      nsfw: true,
     },
     mutations: {
       incrementPage (state) {
@@ -22,6 +23,10 @@ export const store =  new Vuex.Store({
       {
           state.volume = payload.value;
           localStorage.setItem('volume', payload.value)
+      },
+      toggleNSFW(state)
+      {
+          state.nsfw = !state.nsfw
       }
     },
     actions: {
@@ -36,6 +41,10 @@ export const store =  new Vuex.Store({
         changeVolume(context, payload)
         {
             context.commit('changeVolume', payload)
+        },
+        toggleNSFW(context)
+        {
+            context.commit('toggleNSFW')
         }
       }
   })
