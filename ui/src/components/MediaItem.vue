@@ -1,6 +1,6 @@
 <template>
     <li class="media-item-li" v-on:click="openWindows(index)">
-             <img v-bind:src="item.base_url + item.thumbnail" class="media-item-img  rounded w-100 h-100" v-bind:class = "nsfw?'nsfw':''" v-bind:alt="item.fullname">
+             <img v-bind:src="item.base_url + item.thumbnail" class="media-item-img  rounded w-100 h-100" v-bind:class = "nsfw?'nsfw':''" >
     </li>
 </template>
 
@@ -33,7 +33,7 @@
     @media (min-width: 1200px)
     {
       .media-item-li {
-        height: calc((100vw)/8);
+        height: calc((100vw)/11);
       }
     }
     .nsfw {
