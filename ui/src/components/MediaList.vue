@@ -1,6 +1,6 @@
 <template>
-    <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"
-        class="row justify-content-md-center">
+    <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10"
+        class=" justify-content-md-center">
         <b-modal id="b-modal-video" size="xl" centered hide-header hide-footer class="mh-100" @shown=onModalOpened >
             <video controls autoplay class="media-list-video" ref="video_player"
                    :style="{ backgroundImage: 'url(' + selectedItem.base_url + selectedItem.thumbnail + ')' }"
@@ -18,7 +18,7 @@
 
         <MediaItem v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-bind:key="item.id"
                    v-on:open-media="openMedia" class="col-3 p-1 "/>
-    </ul>
+    </div>
 </template>
 
 <script>

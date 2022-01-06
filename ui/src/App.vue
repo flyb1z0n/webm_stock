@@ -5,7 +5,7 @@
           <NsfwWidget/>
         </nav>
 
-        <div class="container p-2">
+        <div class="container-xxl p-1">
             <MediaList/>
         </div>
     </div>
@@ -41,4 +41,29 @@
         color: #2c3e50;
         margin-top: 60px;
     }
+
+    .container-xxl{
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .container-xxl{
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    @media (min-width: 1200px)
+    {
+      .container-xxl {
+        max-width: 1320px;
+      }
+    }
+
+
 </style>
