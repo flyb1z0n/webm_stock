@@ -2,15 +2,7 @@
     <div>
         <nav class="navbar navbar-light bg-light">
             <span class="navbar-brand mb-0 h1">WebmStock [{{mode}}]</span>
-          <b-form-checkbox
-              id="nsfw-switch"
-              :value.sync="nsfw"
-              value="true"
-              unchecked-value="false"
-              @change="check($event)"
-              switch>
-            NSFW
-          </b-form-checkbox>
+          <NsfwWidget/>
         </nav>
 
         <div class="container p-2">
@@ -21,22 +13,14 @@
 </template>
 
 <script>
-
     import MediaList from '@/components/MediaList'
-    import {mapState} from "vuex";
+    import NsfwWidget from '@/components/NsfwWidget'
 
     export default {
         name: 'App',
         components: {
-            MediaList
-        },
-        computed: mapState({
-          nsfw: state => state.nsfw,
-        }),
-        methods: {
-          check: function(e) {
-            this.$store.dispatch('toggleNSFW');
-          }
+            MediaList,
+            NsfwWidget
         },
         data() {
             return {
