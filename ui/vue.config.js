@@ -1,5 +1,5 @@
 module.exports = {
   devServer: {
-    host: 'local.flyb1z0n.com'
+    host: 'local.webm.party'
   }
 }
