@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1">WebmStock [{{mode}}]</span>
+            <span class="navbar-brand mb-0 h1">WebmParty [{{mode}}]</span>
           <NsfwWidget/>
         </nav>
 
