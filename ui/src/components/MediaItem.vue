@@ -29,6 +29,14 @@
         display: inline-block;
         height: calc((100vw)/8);
         text-align: center;
+        transition-duration: 300ms;
+    }
+
+    .media-item-li:hover {
+      transform: scale(1.2);
+      z-index: 1;
+      cursor: pointer;
+
     }
     @media (min-width: 1200px)
     {
@@ -45,5 +53,9 @@
         opacity: 1;
         filter: none;
         -webkit-filter: none;
+
+    }
+    .media-item-li:hover img{
+      box-shadow: 1px 0px 5px 5px rgba(0,0,0,0.49);
     }
 </style>
