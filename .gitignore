@@ -6,3 +6,4 @@ _venv
 *.pyc
 __pycache__
 *.iml
+package-lock.json
