@@ -58,7 +58,7 @@ def update_thread(num, status='ACTIVE', fail_count=0, last_post_num=None):
         'status': status,
         'fail_count': fail_count
     }
-    if last_post_num != None:
+    if last_post_num is not None:
         data['last_post_num'] = last_post_num
 
     threads_collection().update({"num":num} ,{'$set': data})
