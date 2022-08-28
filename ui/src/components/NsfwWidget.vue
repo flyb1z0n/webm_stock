@@ -5,10 +5,9 @@
     </label>
     <b-form-checkbox
         id="nsfw-switch"
-        :value.sync="nsfw"
+        v-model="nsfw"
         value="true"
         unchecked-value="false"
-        @change="check($event)"
         switch>
 
     </b-form-checkbox>
@@ -23,19 +22,22 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
 
 export default {
   name: 'NsfwWidget',
 
-  computed: mapState({
-    nsfw: state => state.nsfw,
-  }),
-  methods: {
-    check: function (e) {
-      this.$store.dispatch('toggleNSFW');
+  computed: {
+    nsfw: {
+      get() {
+        console.log(this.$store.state.nsfw);
+        return this.$store.state.nsfw;
+      },
+      set(value) {
+        console.log("set", value);
+        this.$store.dispatch('changeNsfw', {value: (value === 'true')});
+      }
     }
-  }
+  },
 }
 </script>
 <style>
