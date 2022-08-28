@@ -17,5 +17,8 @@ Vue.use(Vuex)
 new Vue({
   render: h => h(App),
   el: '#app',
-  store: store
+  store: store,
+  created () {
+    document.title = "WebmParty";
+  }
 })
