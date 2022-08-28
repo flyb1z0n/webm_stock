@@ -51,6 +51,8 @@ class ThreadMonitor(threading.Thread):
             count_media_files = 0
             for post in posts:
                 files = post['files']
+                if files is None:
+                    continue
                 for file in files:
                     name, ext = os.path.splitext(file['name'])
                     if ext.lower() in self.media_extensions:
