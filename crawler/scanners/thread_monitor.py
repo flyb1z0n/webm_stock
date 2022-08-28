@@ -59,7 +59,6 @@ class ThreadMonitor(threading.Thread):
                         mongodb.add_file(thread_num, post, file)
                         count_media_files += 1
             logging.info("Updates for thread #" + str(thread_num)
-                         + ' found ' + str(len(files)) + " files"
                          + ' added ' + str(count_media_files) + " media files")
             max_post_num = max((x['num'] for x in posts))
             mongodb.update_thread(thread_num, last_post_num=max_post_num)
